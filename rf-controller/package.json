@@ -1,0 +1,30 @@
+{
+  "name": "rf-controller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "standard": {
+    "standard": {
+      "globals": [],
+      "env": {
+        "node": true,
+        "jest": true
+      },
+      "ignore": [
+        "/bin",
+        "/node_modules"
+      ]
+    }
+  },
+  "dependencies": {
+    "serialport": "^10.3.0"
+  },
+  "devDependencies": {
+    "standard": "^16.0.4"
+  }
+}
