@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "fireplace-skill"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-6dx7vsqieo3n"
+s3_prefix = "fireplace-skill"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
