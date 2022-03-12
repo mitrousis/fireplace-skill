@@ -1,27 +1,37 @@
 {
-  "name": "fireplace-skill",
-  "description": "fireplace-skill",
+  "name": "fireplace-home-skill",
   "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "ask-sdk": "^2.12.0"
+  "description": "Fireplace Smart Home Skill",
+  "main": "index.js",
+  "scripts": {
+    "generateInterfaces": "json2ts ./schema/alexa_smart_home_message_schema.json > typings/AlexaSmartHomeAPI.ts --style.singleQuote --no-style.semi",
+    "generateMessages": "json-ts $FILE_PATH --prefix '' --rootName $FILE_NAME | tee $OUTPUT_FILE_NAME",
+    "getSchema": "curl https://raw.githubusercontent.com/alexa/alexa-smarthome/master/validation_schemas/alexa_smart_home_message_schema.json -o ./schema/alexa_smart_home_message_schema.json",
+    "build": "rm -f archive.zip && tsc && zip -r -X archive.zip ./src ./package.json ./index.js ./node_modules",
+    "tsc": "tsc --outDir ./build",
+    "ts-node": "ts-node"
   },
   "devDependencies": {
-    "jest": "^26.6.3",
-    "standard": "^16.0.4"
+    "json-schema-to-typescript": "^6.1.3",
+    "json-ts": "^1.6.4",
+    "source-map-support": "^0.5.12",
+    "ts-node": "^10.7.0",
+    "ts-standard": "^11.0.0",
+    "typescript": "^3.4.5",
+    "uuid": "^3.3.2"
   },
-  "scripts": {
-    "test": "jest"
+  "dependencies": {
+    "axios": "^0.21.2",
+    "dotenv": "^7.0.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.25"
   },
-  "standard": {
-    "globals": [],
-    "env": {
-      "node": true,
-      "jest": true
-    },
-    "ignore": [
-      "/bin",
-      "/node_modules"
+  "ts-standard": {
+    "project": "./tsconfig.json",
+    "envs": [
+      "es6",
+      "node",
+      "jest"
     ]
   }
 }
