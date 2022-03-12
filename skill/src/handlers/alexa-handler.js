@@ -1,4 +1,8 @@
+const Alexa = require('ask-sdk-core')
+
 exports.handler = function (request, context) {
+  console.log(request, context)
+
   if (request.directive.header.namespace === 'Alexa.Discovery' && request.directive.header.name === 'Discover') {
     log('DEBUG:', 'Discover request', JSON.stringify(request))
     handleDiscovery(request, context, '')
@@ -12,48 +16,48 @@ exports.handler = function (request, context) {
   function handleDiscovery (request, context) {
     const payload = {
       endpoints:
-            [
-              {
-                endpointId: 'demo_id',
-                manufacturerName: 'Smart Device Company',
-                friendlyName: 'Bedroom Outlet',
-                description: 'Smart Device Switch',
-                displayCategories: ['SWITCH'],
-                additionalAttributes: {
-                  manufacturer: 'Smart Device Company',
-                  model: 'Sample Model',
-                  serialNumber: 'U11112233456',
-                  firmwareVersion: '1.24.2546',
-                  softwareVersion: '1.036',
-                  customIdentifier: 'Sample custom ID'
+        [
+          {
+            endpointId: 'demo_id',
+            manufacturerName: 'Smart Device Company',
+            friendlyName: 'Bedroom Outlet',
+            description: 'Smart Device Switch',
+            displayCategories: ['SWITCH'],
+            additionalAttributes: {
+              manufacturer: 'Smart Device Company',
+              model: 'Sample Model',
+              serialNumber: 'U11112233456',
+              firmwareVersion: '1.24.2546',
+              softwareVersion: '1.036',
+              customIdentifier: 'Sample custom ID'
+            },
+            cookie: {
+              key1: 'arbitrary key/value pairs for skill to reference this endpoint.',
+              key2: 'There can be multiple entries',
+              key3: 'but they should only be used for reference purposes.',
+              key4: 'This is not a suitable place to maintain current endpoint state.'
+            },
+            capabilities:
+              [
+                {
+                  type: 'AlexaInterface',
+                  interface: 'Alexa',
+                  version: '3'
                 },
-                cookie: {
-                  key1: 'arbitrary key/value pairs for skill to reference this endpoint.',
-                  key2: 'There can be multiple entries',
-                  key3: 'but they should only be used for reference purposes.',
-                  key4: 'This is not a suitable place to maintain current endpoint state.'
-                },
-                capabilities:
-                    [
-                      {
-                        type: 'AlexaInterface',
-                        interface: 'Alexa',
-                        version: '3'
-                      },
-                      {
-                        interface: 'Alexa.PowerController',
-                        version: '3',
-                        type: 'AlexaInterface',
-                        properties: {
-                          supported: [{
-                            name: 'powerState'
-                          }],
-                          retrievable: true
-                        }
-                      }
-                    ]
-              }
-            ]
+                {
+                  interface: 'Alexa.PowerController',
+                  version: '3',
+                  type: 'AlexaInterface',
+                  properties: {
+                    supported: [{
+                      name: 'powerState'
+                    }],
+                    retrievable: true
+                  }
+                }
+              ]
+          }
+        ]
     }
     const header = request.directive.header
     header.name = 'Discover.Response'
